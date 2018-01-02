@@ -60,7 +60,7 @@ class EasyUI {
         echo "<script type = \"text/javascript\" src = \"vendor/fgendorf/phpeasyui/jquery.min.js\"></script>";
         echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/jquery.easyui.min.js\"></script>";
         for($x=0;sizeof($this->extensions)>$x;++$x){
-            echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/easyui/extensions/{$this->extensions[$x]}/{$this->extensions[$x]}.js\"></script>";
+            echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/extensions/{$this->extensions[$x]}/{$this->extensions[$x]}.js\"></script>";
         }
     }
 
