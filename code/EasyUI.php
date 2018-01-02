@@ -33,7 +33,7 @@ class EasyUI {
      * value to be changed at each new release
      * @var string 
      */
-    protected $sessionload = "2017110901";
+    protected $sessionload = "2018010201";
 
     /**
      * set the theme to be used
@@ -52,13 +52,13 @@ class EasyUI {
     }
 
     public function writeHeaders() {
-        echo "<link href = \"vendor/fgendorf/easyui/themes/{$this->theme}/easyui.css\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<link href = \"vendor/fgendorf/easyui/themes/icon.css\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<link href = \"vendor/fgendorf/easyui/themes/{$this->theme}/linkbutton.css\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<link href = \"vendor/fgendorf/easyui/themes/{$this->theme}/menubutton.css\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<link href = \"vendor/fgendorf/easyui/themes/{$this->theme}/tooltip.css\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<script type = \"text/javascript\" src = \"vendor/fgendorf/easyui/jquery.min.js\"></script>";
-        echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/easyui/jquery.easyui.min.js\"></script>";
+        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/easyui.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/icon.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/linkbutton.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/menubutton.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/tooltip.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<script type = \"text/javascript\" src = \"vendor/fgendorf/phpeasyui/jquery.min.js\"></script>";
+        echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/jquery.easyui.min.js\"></script>";
         for($x=0;sizeof($this->extensions)>$x;++$x){
             echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/easyui/extensions/{$this->extensions[$x]}/{$this->extensions[$x]}.js\"></script>";
         }
