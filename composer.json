@@ -1,12 +1,16 @@
 {
-  "name": "fgendorf/phpeasyui",
-  "description": "jQuery EasyUI framework helps you build your web pages easily. Homepage: http://easyui.com",
-  "authors": [
+    "name": "fgendorf/phpeasyui",
+    "description": "jQuery EasyUI framework helps you build your web pages easily. Homepage: http://easyui.com",
+    "authors": [
         {
             "name": "Frederico Gendorf",
             "email": "fgendorf@gmail.com"
         }
-   ],
-  "license": "GPL License",
-  "homepage": "http://easyui.com"
+    ],
+    "license": "GPL License",
+    "homepage": "http://easyui.com",
+    "require": {
+        "php": ">=5.4.0"
+    }
+
 }
