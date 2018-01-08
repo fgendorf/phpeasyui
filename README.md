@@ -8,7 +8,7 @@ Class to use Jquery-easyui framework with composer
 First you need include the package phpeasyui in you project.
 
 ```
-composer require phpeasyui
+composer require fgendorf/phpeasyui
 ```
 
 ## HOWTO use it
@@ -19,7 +19,7 @@ composer require phpeasyui
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Project Title</title>
         <?
-        $easyui = new EasyUI();
+        $easyui = new PHPEasyUI();
         $easyui->writeHeaders();
         ?>
     </head>
@@ -53,6 +53,7 @@ $easyui->useExtensions($extensions);
 ```
 
 Extensions list:
+
      * - columns-ext
      * - datagrid-cellediting
      * - datagrid-filter
