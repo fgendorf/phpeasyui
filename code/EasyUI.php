@@ -7,7 +7,7 @@ class EasyUI {
      * - black
      * - bootstrap
      * - default
-     * - {$this->theme}
+     * - gray
      * - material
      * - metro
      * 
@@ -20,11 +20,14 @@ class EasyUI {
      * - columns-ext
      * - datagrid-cellediting
      * - datagrid-filter
+     * - datagrid-bufferview
+     * - datagrid-detailview
+     * - datagrid-groupview
+     * - datagrid-scrollview
      * - jquery-easyui-color
      * - jquery-easyui-pivotgrid
      * - jquery-easyui-ribbon
      * - jquery-easyui-texteditor
-     * - jquery-easyui-datagridview
      * @var array 
      */
     protected $extensions = array();
