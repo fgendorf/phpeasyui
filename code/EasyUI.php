@@ -36,7 +36,7 @@ class EasyUI {
      * value to be changed at each new release
      * @var string 
      */
-    protected $sessionload = "2018010201";
+    protected $sessionload = "2018010901";
 
     /**
      * set the theme to be used
@@ -55,19 +55,19 @@ class EasyUI {
     }
 
     public function writeHeaders() {
-        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/easyui.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/easyui.css?s={$this->sessionload}\" rel = \"stylesheet\" type = \"text/css\"/>";
         echo "<link href = \"vendor/fgendorf/phpeasyui/themes/icon.css\" rel = \"stylesheet\" type = \"text/css\"/>";
         echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/linkbutton.css\" rel = \"stylesheet\" type = \"text/css\"/>";
         echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/menubutton.css\" rel = \"stylesheet\" type = \"text/css\"/>";
         echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/tooltip.css\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<script type = \"text/javascript\" src = \"vendor/fgendorf/phpeasyui/jquery.min.js\"></script>";
-        echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/jquery.easyui.min.js\"></script>";
+        echo "<script type = \"text/javascript\" src = \"vendor/fgendorf/phpeasyui/jquery.min.js?s={$this->sessionload}\"></script>";
+        echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/jquery.easyui.min.js?s={$this->sessionload}\"></script>";
         $datagridview = array('datagrid-groupview', 'datagrid-bufferview', 'datagrid-detailview', 'datagrid-scrollview');
         for ($x = 0; sizeof($this->extensions) > $x;  ++$x) {
             if (!in_array($this->extensions[$x], $datagridview)) {
-                echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/extensions/{$this->extensions[$x]}/{$this->extensions[$x]}.js\"></script>";
+                echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/extensions/{$this->extensions[$x]}/{$this->extensions[$x]}.js?s={$this->sessionload}\"></script>";
             }else{
-                echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/extensions/jquery-easyui-datagridview/{$this->extensions[$x]}.js\"></script>";
+                echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/extensions/jquery-easyui-datagridview/{$this->extensions[$x]}.js?s={$this->sessionload}\"></script>";
                 
             }
         }
