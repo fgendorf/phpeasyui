@@ -36,10 +36,10 @@ class EasyUI {
      * value to be changed at each new release
      * @var string 
      */
-    protected $sessionload = "2018011201";
+    protected $sessionload;
 
     public function __construct() {
-        
+        $this->sessionload = "2018011201";
     }
 
     /**
@@ -67,12 +67,11 @@ class EasyUI {
         echo "<script type = \"text/javascript\" src = \"vendor/fgendorf/phpeasyui/jquery.min.js?s={$this->sessionload}\"></script>";
         echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/jquery.easyui.min.js?s={$this->sessionload}\"></script>";
         $datagridview = array('datagrid-groupview', 'datagrid-bufferview', 'datagrid-detailview', 'datagrid-scrollview');
-        for ($x = 0; sizeof($this->extensions) > $x;  ++$x) {
+        for ($x = 0; sizeof($this->extensions) > $x; ++$x) {
             if (!in_array($this->extensions[$x], $datagridview)) {
                 echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/extensions/{$this->extensions[$x]}/{$this->extensions[$x]}.js?s={$this->sessionload}\"></script>";
-            }else{
+            } else {
                 echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/extensions/jquery-easyui-datagridview/{$this->extensions[$x]}.js?s={$this->sessionload}\"></script>";
-                
             }
         }
     }

@@ -2,6 +2,6 @@
 
 class PHPEasyUI extends EasyUI{
     public function __construct() {
-        parent::__construt();
+        parent::__construct();
     }
 }
