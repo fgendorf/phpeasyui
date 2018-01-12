@@ -36,7 +36,11 @@ class EasyUI {
      * value to be changed at each new release
      * @var string 
      */
-    protected $sessionload = "2018010901";
+    protected $sessionload = "2018011201";
+
+    public function __construct() {
+        
+    }
 
     /**
      * set the theme to be used
