@@ -66,6 +66,9 @@ class EasyUI {
         echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/tooltip.css\" rel = \"stylesheet\" type = \"text/css\"/>";
         echo "<script type = \"text/javascript\" src = \"vendor/fgendorf/phpeasyui/jquery.min.js?s={$this->sessionload}\"></script>";
         echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/jquery.easyui.min.js?s={$this->sessionload}\"></script>";
+        if (in_array("jquery-easyui-texteditor", $this->extensions)) {
+            echo "<link href = \"vendor/fgendorf/phpeasyui/extensions/jquery-easyui-texteditor/texteditor.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        }
         $datagridview = array('datagrid-groupview', 'datagrid-bufferview', 'datagrid-detailview', 'datagrid-scrollview');
         for ($x = 0; sizeof($this->extensions) > $x; ++$x) {
             if (!in_array($this->extensions[$x], $datagridview)) {
