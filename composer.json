@@ -7,7 +7,6 @@
             "email": "fgendorf@gmail.com"
         }
     ],
-    "license": "GPL License",
     "homepage": "http://jeasyui.com",
     "require": {
         "php": ">=5.4.0"
