@@ -39,7 +39,7 @@ class EasyUI {
     protected $sessionload;
 
     public function __construct() {
-        $this->sessionload = "2018041601";
+        $this->sessionload = "2018042601";
     }
 
     /**
