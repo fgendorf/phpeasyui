@@ -80,3 +80,9 @@
 .icon-backcolor{
 	background: url('images/backcolor.png') center center;
 }
+.icon-image{
+	background: url('images/image.png') center center;
+}
+.icon-link{
+	background: url('images/link.png') center center;
+}

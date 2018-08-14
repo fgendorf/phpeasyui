@@ -1,5 +1,5 @@
 $.extend($.fn.datagrid.defaults, {
-	rowHeight: 25,
+	rowHeight: null,
 	onBeforeFetch: function(page){},
 	onFetch: function(page, rows){}
 });
@@ -59,6 +59,7 @@ var bufferview = $.extend({}, $.fn.datagrid.defaults.view, {
 		init();
 		
 		function init(){
+			opts.rowHeight = $(target).datagrid('getRowHeight');
 			// erase the onLoadSuccess event, make sure it can't be triggered
 			state.onLoadSuccess = opts.onLoadSuccess;
 			opts.onLoadSuccess = function(){};
@@ -177,3 +178,16 @@ var bufferview = $.extend({}, $.fn.datagrid.defaults.view, {
 		}
 	}
 });
+$.extend($.fn.datagrid.methods, {
+	getRowHeight: function(jq){
+		var opts = jq.datagrid('options');
+		if (!opts.rowHeight){
+			var d = $('<div style="position:absolute;top:-1000px;width:100px;height:100px;padding:5px"><table><tr class="datagrid-row"><td>cell</td></tr></table></div>').appendTo('body');
+			var rowHeight = d.find('tr').outerHeight();
+			d.remove();
+			opts.rowHeight = rowHeight;
+		}
+		return opts.rowHeight;
+	}
+});
+

@@ -115,7 +115,7 @@ var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
 					cc.push('<input type="checkbox" name="' + field + '" value="' + (value!=undefined ? value : '') + '">');
 				} else if (col.expander) {
 					//cc.push('<div style="text-align:center;width:16px;height:16px;">');
-					cc.push('<span class="datagrid-row-expander datagrid-row-expand" style="display:inline-block;width:16px;height:16px;cursor:pointer;" />');
+					cc.push('<span class="datagrid-row-expander datagrid-row-expand" style="display:inline-block;width:16px;height:16px;margin:0;cursor:pointer;" />');
 					//cc.push('</div>');
 				} else if (col.formatter){
 					cc.push(col.formatter(value, rowData, rowIndex));
@@ -208,7 +208,7 @@ var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
 		var opts = state.options;
 		var body = dc.body1.add(dc.body2);
 		var clickHandler = ($.data(body[0],'events')||$._data(body[0],'events')).click[0].handler;
-		body.unbind('click').bind('click', function(e){
+		body.unbind('click.detailview').bind('click.detailview', function(e){
 			var tt = $(e.target);
 			var tr = tt.closest('tr.datagrid-row');
 			if (!tr.length){return}
@@ -220,11 +220,11 @@ var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
 					$(target).datagrid('collapseRow', rowIndex);
 				}
 				$(target).datagrid('fixRowHeight');
+				e.stopPropagation();
 				
 			} else {
-				clickHandler(e);
+				// clickHandler(e);
 			}
-			e.stopPropagation();
 		});
 	},
 	

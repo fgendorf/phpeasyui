@@ -1,5 +1,5 @@
 $.extend($.fn.datagrid.defaults, {
-	groupHeight: 25,
+	groupHeight: 28,
 	expanderWidth: 30,
 	groupStyler: function(value,rows){return ''}
 });
