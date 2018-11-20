@@ -172,7 +172,8 @@
 		cells.draggable({
 			revert: true,
 			cursor: 'pointer',
-			edge: 5,
+			// edge: 5,
+			edge: opts.resizeEdge||5,
 			proxy:function(source){
 				var p = $('<div class="tree-node-proxy tree-dnd-no" style="position:absolute;border:1px solid #ff0000"/>').appendTo('body');
 				p.html($(source).text());

@@ -108,11 +108,12 @@
 			input = $('<textarea class="texteditor-value" style="display:none"></textarea>').insertAfter(target);
 		}
 		input.attr('name', opts.name || $(target).attr('name'));
-		$(target).unbind('.texteditor').bind('mouseup.texteditor keyup.texteditor',function(){
+		$(target).unbind('.texteditor').bind('blur.texteditor', function(e){
+			input.val($(target).html());
+		});
+		$(target).dialog('dialog').unbind('.texteditor').bind('mouseup.texteditor keyup.texteditor',function(){
 			saveRange(target);
 			updateToolbar(target);
-		}).bind('blur.texteditor', function(e){
-			input.val($(target).html());
 		});
 		input.val($(target).html());
 	}

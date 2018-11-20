@@ -4,7 +4,7 @@
 }
 .ribbon-group{
 	position:relative;
-	height:92px;
+	height:106px;
 	float:left;
 	border-style:solid;
 	border-width:1px;
@@ -34,7 +34,7 @@
 .ribbon-group-sep{
 	float:left;
 	width:0;
-	height:102px;
+	height:112px;
 	font-size:0;
 	margin:0 2px;
 	border-left:1px solid #ccc;

@@ -732,14 +732,22 @@
 		opts.onResizeColumn = function(field,width){
 			var fc = $(this).datagrid('getPanel').find('.datagrid-header .datagrid-filter-c');
 			var focusOne = fc.find('.datagrid-filter:focus');
-			fc.hide();
+			// fc.hide();
+			fc.css({
+				width:'1px',
+				height:0
+			});
 			$(target).datagrid('fitColumns');
 			if (opts.fitColumns){
 				resizeFilter(target);
 			} else {
 				resizeFilter(target, field);
 			}
-			fc.show();
+			// fc.show();
+			fc.css({
+				width:'',
+				height:''
+			});
 			focusOne.blur().focus();
 			onResizeColumn.call(target, field, width);
 		};
