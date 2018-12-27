@@ -1,4 +1,4 @@
-Version 1.6.x
+Version 1.7.0
 -------------
 * Bug
  * sidemenu: The tooltip has a wrong position when the 'floatMenuPosition' is set to 'left'. fixed.
@@ -11,6 +11,7 @@ Version 1.6.x
  * tree: The 'find' method is enhanced to find a node easily.
  * combo: Add 'panelValign' property.
  * datagrid: The sorting parameters will be ignored when the 'remoteSort' is set to false.
+ * timespinner: Add 'hour12' property to display in 12 hour format.
 
 Version 1.6.0
 -------------

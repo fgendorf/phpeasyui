@@ -320,7 +320,7 @@
 .tabs li{
 	display: inherit;
 }
-.tabs li a.tabs-inner{
+.tabs li .tabs-inner{
 	height: auto;
 	line-height: normal;
 	display: inherit;
@@ -344,8 +344,8 @@
 	right: -1px;
 }
 .tabs-header-left .tabs li,.tabs-header-right .tabs li,
-.tabs-header-left .tabs li a.tabs-inner,
-.tabs-header-right .tabs li a.tabs-inner{
+.tabs-header-left .tabs li .tabs-inner,
+.tabs-header-right .tabs li .tabs-inner{
 	display: inherit;
 }
 

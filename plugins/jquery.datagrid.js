@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.6.11
+ * EasyUI for jQuery 1.7.0
  * 
  * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
  *
@@ -107,6 +107,9 @@ var _22=$.data(_21,"datagrid");
 var _23=_22.options;
 var dc=_22.dc;
 var _24=_22.panel;
+if(!_24.is(":visible")){
+return;
+}
 var _25=_24.width();
 var _26=_24.height();
 var _27=dc.view;
