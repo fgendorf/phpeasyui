@@ -14,6 +14,12 @@ class EasyUI {
      * @var string 
      */
     protected $theme = "gray";
+    
+    /**
+     * PATH of relative place of vendor location
+     * @var string 
+     */
+    protected $path;
 
     /**
      * load additional extensions
@@ -39,7 +45,7 @@ class EasyUI {
     protected $sessionload;
 
     public function __construct() {
-        $this->sessionload = "2018122701";
+        $this->sessionload = "2019011801";
     }
 
     /**
@@ -48,6 +54,10 @@ class EasyUI {
      */
     public function setTheme($theme) {
         $this->theme = $theme;
+    }
+    
+    public function setPath($path){
+        $this->path = $path;
     }
 
     /**
@@ -59,22 +69,22 @@ class EasyUI {
     }
 
     public function writeHeaders() {
-        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/easyui.css?s={$this->sessionload}\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/icon.css\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/linkbutton.css\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/menubutton.css\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<link href = \"vendor/fgendorf/phpeasyui/themes/{$this->theme}/tooltip.css\" rel = \"stylesheet\" type = \"text/css\"/>";
-        echo "<script type = \"text/javascript\" src = \"vendor/fgendorf/phpeasyui/jquery.min.js?s={$this->sessionload}\"></script>";
-        echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/jquery.easyui.min.js?s={$this->sessionload}\"></script>";
+        echo "<link href = \"{$this->path}vendor/fgendorf/phpeasyui/themes/{$this->theme}/easyui.css?s={$this->sessionload}\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<link href = \"{$this->path}vendor/fgendorf/phpeasyui/themes/icon.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<link href = \"{$this->path}vendor/fgendorf/phpeasyui/themes/{$this->theme}/linkbutton.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<link href = \"{$this->path}vendor/fgendorf/phpeasyui/themes/{$this->theme}/menubutton.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<link href = \"{$this->path}vendor/fgendorf/phpeasyui/themes/{$this->theme}/tooltip.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+        echo "<script type = \"text/javascript\" src = \"{$this->path}vendor/fgendorf/phpeasyui/jquery.min.js?s={$this->sessionload}\"></script>";
+        echo "<script type=\"text/javascript\" src=\"{$this->path}vendor/fgendorf/phpeasyui/jquery.easyui.min.js?s={$this->sessionload}\"></script>";
         if (in_array("jquery-easyui-texteditor", $this->extensions)) {
-            echo "<link href = \"vendor/fgendorf/phpeasyui/extensions/jquery-easyui-texteditor/texteditor.css\" rel = \"stylesheet\" type = \"text/css\"/>";
+            echo "<link href = \"{$this->path}vendor/fgendorf/phpeasyui/extensions/jquery-easyui-texteditor/texteditor.css\" rel = \"stylesheet\" type = \"text/css\"/>";
         }
         $datagridview = array('datagrid-groupview', 'datagrid-bufferview', 'datagrid-detailview', 'datagrid-scrollview');
         for ($x = 0; sizeof($this->extensions) > $x; ++$x) {
             if (!in_array($this->extensions[$x], $datagridview)) {
-                echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/extensions/{$this->extensions[$x]}/{$this->extensions[$x]}.js?s={$this->sessionload}\"></script>";
+                echo "<script type=\"text/javascript\" src=\"{$this->path}vendor/fgendorf/phpeasyui/extensions/{$this->extensions[$x]}/{$this->extensions[$x]}.js?s={$this->sessionload}\"></script>";
             } else {
-                echo "<script type=\"text/javascript\" src=\"vendor/fgendorf/phpeasyui/extensions/jquery-easyui-datagridview/{$this->extensions[$x]}.js?s={$this->sessionload}\"></script>";
+                echo "<script type=\"text/javascript\" src=\"{$this->path}vendor/fgendorf/phpeasyui/extensions/jquery-easyui-datagridview/{$this->extensions[$x]}.js?s={$this->sessionload}\"></script>";
             }
         }
     }

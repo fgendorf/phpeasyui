@@ -1,3 +1,10 @@
+Version 1.7.x
+-------------
+* Bug
+ * treegrid: The 'pageNumber' can't be initialized with the specified value. fixed.
+* Improvement
+ * switchbutton: Add the 'label','labelAlign','labelPosition','labelWidth' properties.
+
 Version 1.7.0
 -------------
 * Bug
