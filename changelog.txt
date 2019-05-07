@@ -1,4 +1,4 @@
-Version 1.7.x
+Version 1.8.0
 -------------
 * Bug
  * treegrid: The 'pageNumber' can't be initialized with the specified value. fixed.
@@ -8,6 +8,7 @@ Version 1.7.x
  * switchbutton: Accept 'tabindex' attribute to get focus when the user press TAB key.
  * form: The 'onChange' event is available for all the form component.
  * calendar: The 'Date' property is available to support the hijri date.
+ * textbox: The floating label is available.
 
 Version 1.7.0
 -------------
