@@ -1,3 +1,9 @@
+Version 1.8.x
+-------------
+* Improvement
+ * checkbox: Add 'readonly' property.
+ * radiobutton: Add 'readonly' property.
+
 Version 1.8.0
 -------------
 * Bug
