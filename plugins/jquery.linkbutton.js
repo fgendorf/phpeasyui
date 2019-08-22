@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.8.1
+ * EasyUI for jQuery 1.8.4
  * 
  * Copyright (c) 2009-2019 www.jeasyui.com. All rights reserved.
  *
@@ -127,6 +127,7 @@ if(_16.onclick){
 _14.onclick=_16.onclick;
 }
 }
+$(_14)._propAttr("disabled",_15);
 };
 $.fn.linkbutton=function(_19,_1a){
 if(typeof _19=="string"){

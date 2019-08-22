@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.8.1
+ * EasyUI for jQuery 1.8.4
  * 
  * Copyright (c) 2009-2019 www.jeasyui.com. All rights reserved.
  *
@@ -503,7 +503,7 @@ bb.unbind();
 for(var _7d in _7b.rowEvents){
 bb.bind(_7d,_7b.rowEvents[_7d]);
 }
-dc.body1.bind("mousewheel DOMMouseScroll",function(e){
+dc.body1.bind("mousewheel DOMMouseScroll MozMousePixelScroll",function(e){
 e.preventDefault();
 var e1=e.originalEvent||window.event;
 var _81=e1.wheelDelta||e1.detail*(-1);
