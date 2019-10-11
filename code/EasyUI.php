@@ -26,6 +26,7 @@ class EasyUI {
      * - columns-ext
      * - datagrid-cellediting
      * - datagrid-filter
+     * - datagrid-export
      * - datagrid-bufferview
      * - datagrid-detailview
      * - datagrid-groupview
@@ -45,7 +46,7 @@ class EasyUI {
     protected $sessionload;
 
     public function __construct() {
-        $this->sessionload = "2019082201";
+        $this->sessionload = "2019101101";
     }
 
     /**

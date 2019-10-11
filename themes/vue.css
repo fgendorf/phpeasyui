@@ -109,6 +109,14 @@
 	width: 12em;
 	height: 30px;
 }
+.f-vtitle{
+	-ms-writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	writing-mode: vertical-lr;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 
 .scroll-body{
 	overflow: auto;
