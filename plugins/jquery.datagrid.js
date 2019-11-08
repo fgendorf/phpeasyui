@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.8.6
+ * EasyUI for jQuery 1.8.8
  * 
  * Copyright (c) 2009-2019 www.jeasyui.com. All rights reserved.
  *
@@ -449,9 +449,9 @@ var _7a=_79.panel;
 var _7b=_79.options;
 var dc=_79.dc;
 var _7c=dc.header1.add(dc.header2);
-_7c.unbind(".datagrid");
+_7c._unbind(".datagrid");
 for(var _7d in _7b.headerEvents){
-_7c.bind(_7d+".datagrid",_7b.headerEvents[_7d]);
+_7c._bind(_7d+".datagrid",_7b.headerEvents[_7d]);
 }
 var _7e=_7c.find("div.datagrid-cell");
 var _7f=_7b.resizeHandle=="right"?"e":(_7b.resizeHandle=="left"?"w":"e,w");
@@ -499,11 +499,11 @@ _79.resizing=false;
 }});
 });
 var bb=dc.body1.add(dc.body2);
-bb.unbind();
+bb._unbind();
 for(var _7d in _7b.rowEvents){
-bb.bind(_7d,_7b.rowEvents[_7d]);
+bb._bind(_7d,_7b.rowEvents[_7d]);
 }
-dc.body1.bind("mousewheel DOMMouseScroll MozMousePixelScroll",function(e){
+dc.body1._bind("mousewheel DOMMouseScroll MozMousePixelScroll",function(e){
 e.preventDefault();
 var e1=e.originalEvent||window.event;
 var _81=e1.wheelDelta||e1.detail*(-1);
@@ -514,7 +514,7 @@ var dg=$(e.target).closest("div.datagrid-view").children(".datagrid-f");
 var dc=dg.data("datagrid").dc;
 dc.body2.scrollTop(dc.body2.scrollTop()-_81);
 });
-dc.body2.bind("scroll",function(){
+dc.body2._bind("scroll",function(){
 var b1=dc.view1.children("div.datagrid-body");
 var stv=$(this).scrollTop();
 $(this).scrollTop(stv);
@@ -1544,7 +1544,7 @@ var _178=cell._outerWidth();
 cell.addClass("datagrid-editable");
 cell._outerWidth(_178);
 cell.html("<table border=\"0\" cellspacing=\"0\" cellpadding=\"1\"><tr><td></td></tr></table>");
-cell.children("table").bind("click dblclick contextmenu",function(e){
+cell.children("table")._bind("click dblclick contextmenu",function(e){
 e.stopPropagation();
 });
 $.data(cell[0],"datagrid.editor",{actions:_176,target:_176.init(cell.find("td"),$.extend({height:opts.editorHeight},_175)),field:_173,type:_174,oldHtml:_177});

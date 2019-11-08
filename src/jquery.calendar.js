@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.8.6
+ * EasyUI for jQuery 1.8.8
  * 
  * Copyright (c) 2009-2019 www.jeasyui.com. All rights reserved.
  *
@@ -54,7 +54,7 @@
 		);
 		
 		
-		$(target).bind('_resize', function(e,force){
+		$(target)._bind('_resize', function(e,force){
 			if ($(this).hasClass('easyui-fluid') || force){
 				setSize(target);
 			}
@@ -65,22 +65,22 @@
 	function bindEvents(target){
 		var opts = $.data(target, 'calendar').options;
 		var menu = $(target).find('.calendar-menu');
-		menu.find('.calendar-menu-year').unbind('.calendar').bind('keypress.calendar', function(e){
+		menu.find('.calendar-menu-year')._unbind('.calendar')._bind('keypress.calendar', function(e){
 			if (e.keyCode == 13){
 				setDate(true);
 			}
 		});
-		$(target).unbind('.calendar').bind('mouseover.calendar', function(e){
+		$(target)._unbind('.calendar')._bind('mouseover.calendar', function(e){
 			var t = toTarget(e.target);
 			if (t.hasClass('calendar-nav') || t.hasClass('calendar-text') || (t.hasClass('calendar-day') && !t.hasClass('calendar-disabled'))){
 				t.addClass('calendar-nav-hover');
 			}
-		}).bind('mouseout.calendar', function(e){
+		})._bind('mouseout.calendar', function(e){
 			var t = toTarget(e.target);
 			if (t.hasClass('calendar-nav') || t.hasClass('calendar-text') || (t.hasClass('calendar-day') && !t.hasClass('calendar-disabled'))){
 				t.removeClass('calendar-nav-hover');
 			}
-		}).bind('click.calendar', function(e){
+		})._bind('click.calendar', function(e){
 			var t = toTarget(e.target);
 			if (t.hasClass('calendar-menu-next') || t.hasClass('calendar-nextyear')){
 				showYear(1);
