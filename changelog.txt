@@ -4,6 +4,7 @@ Version 1.9.x
  * datagrid: The 'sorter' function on the column accepts the entire row as the sorting parameters.
  * datebox: Add 'getDate' and 'setDate' methods.
  * pagination: Add 'onBeforeSelectPage' event.
+ * combo: Prevent from conflicting with svg.
 
 Version 1.9.0
 -------------

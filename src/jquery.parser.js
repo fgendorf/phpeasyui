@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.9.3
+ * EasyUI for jQuery 1.9.5
  * 
  * Copyright (c) 2009-2020 www.jeasyui.com. All rights reserved.
  *
@@ -193,16 +193,18 @@
 				$.extend(options, opts);
 			}
 			return options;
+		},
+		parseVars: function(){
+			var d = $('<div style="position:absolute;top:-1000px;width:100px;height:100px;padding:5px"></div>').appendTo('body');
+			$._boxModel = d.outerWidth()!=100;
+			d.remove();
+			d = $('<div style="position:fixed"></div>').appendTo('body');
+			$._positionFixed = (d.css('position') == 'fixed');
+			d.remove();
 		}
 	};
 	$(function(){
-		var d = $('<div style="position:absolute;top:-1000px;width:100px;height:100px;padding:5px"></div>').appendTo('body');
-		$._boxModel = d.outerWidth()!=100;
-		d.remove();
-		d = $('<div style="position:fixed"></div>').appendTo('body');
-		$._positionFixed = (d.css('position') == 'fixed');
-		d.remove();
-		
+		$.parser.parseVars();
 		if (!window.easyloader && $.parser.auto){
 			$.parser.parse();
 		}
