@@ -388,25 +388,25 @@
 		less: {
 			text: 'Less',
 			isMatch: function(source, value){
-				return source < value;
+				return parseFloat(source) < parseFloat(value);
 			}
 		},
 		lessorequal: {
 			text: 'Less Or Equal',
 			isMatch: function(source, value){
-				return source <= value;
+				return parseFloat(source) <= parseFloat(value);
 			}
 		},
 		greater: {
 			text: 'Greater',
 			isMatch: function(source, value){
-				return source > value;
+				return parseFloat(source) > parseFloat(value);
 			}
 		},
 		greaterorequal: {
 			text: 'Greater Or Equal',
 			isMatch: function(source, value){
-				return source >= value;
+				return parseFloat(source) >= parseFloat(value);
 			}
 		}
 	};
