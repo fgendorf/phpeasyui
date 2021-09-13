@@ -100,7 +100,13 @@
 			}
 		}
 		$(target).dialog($.extend({}, opts, {
-			toolbar: opts.dlgToolbar
+			toolbar: opts.dlgToolbar,
+			onOpen: function(){
+				$(this).dialog('dialog').css({
+					position: ''
+				});
+				opts.onOpen.call(this);
+			}
 		}));
 		$(target).attr('contenteditable', true);
 		var input = $(target).dialog('dialog').children('.texteditor-value');
