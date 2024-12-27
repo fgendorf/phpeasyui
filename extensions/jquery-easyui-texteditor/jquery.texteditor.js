@@ -1,3 +1,7 @@
+/**
+ * texteditor - jQuery EasyUI
+ * version: 1.0.3
+ */
 (function($){
 	function saveRange(target){
 		var opts = $.data(target, 'texteditor').options;
@@ -64,6 +68,13 @@
 			var cmd = $(this).attr('cmd');
 			var value = String(document.queryCommandValue(cmd)||'');
 			value = value.replace(/['"]/g,'').toLowerCase();
+			if (cmd == 'lineheight' && opts.selectedRange){
+				var editor = $(this).texteditor('getEditor');
+				var p = $(opts.selectedRange.startContainer).parent();
+				if (p[0] != editor[0] && p[0].style){
+					value = p[0].style.lineHeight;
+				}
+			}
 			var copts = $(this).combo('options');
 			var onChange = copts.onChange;
 			copts.onChange = function(){};
@@ -99,6 +110,7 @@
 				}
 			}
 		}
+		$(target).addClass('texteditor-f');
 		$(target).dialog($.extend({}, opts, {
 			toolbar: opts.dlgToolbar,
 			onOpen: function(){
@@ -114,6 +126,7 @@
 			input = $('<textarea class="texteditor-value" style="display:none"></textarea>').insertAfter(target);
 		}
 		input.attr('name', opts.name || $(target).attr('name'));
+		$(target).removeAttr('name').attr('textboxName', input.attr('name'));
 		$(target).unbind('.texteditor').bind('blur.texteditor', function(e){
 			input.val($(target).html());
 		});
@@ -122,6 +135,7 @@
 			updateToolbar(target);
 		});
 		input.val($(target).html());
+		opts.originalValue = $(target).texteditor('getValue');
 	}
 
 	function buildColorPanel(mb){
@@ -193,25 +207,31 @@
 	}
 
 	function setDisabled(target, disabled){
+		var opts = $.data(target, 'texteditor').options;
 		if (disabled){
 			$(target).dialog('dialog').addClass('texteditor-disabled');
 			$(target).removeAttr('contenteditable');
 			$(target).next().attr('disabled', 'disabled');
+			opts.dlgToolbar.append('<div class="mask"></div>');
 		} else {
 			$(target).dialog('dialog').removeClass('texteditor-disabled');
 			$(target).attr('contenteditable', true);
 			$(target).next().removeAttr('disabled');
+			opts.dlgToolbar.children('.mask').remove();
 		}
 	}
 
 	function setReadonly(target, mode){
+		var opts = $.data(target, 'texteditor').options;
 		var readonly = mode == undefined ? true : mode;
 		if (readonly){
 			$(target).dialog('dialog').addClass('texteditor-readonly');
 			$(target).removeAttr('contenteditable');
+			opts.dlgToolbar.append('<div class="mask"></div>');
 		} else {
 			$(target).dialog('dialog').removeClass('texteditor-readonly');
 			$(target).attr('contenteditable', true);
+			opts.dlgToolbar.children('.mask').remove();
 		}
 	}
 
@@ -272,12 +292,26 @@
 			});
 		},
 		getValue: function(jq){
+			jq.each(function(){
+				$(this).dialog('dialog').children('.texteditor-value').val($(this).html());
+			});
 			return jq.dialog('dialog').children('.texteditor-value').val();
 		},
 		setValue: function(jq, html){
 			return jq.each(function(){
 				$(this).html(html);
 				$(this).dialog('dialog').children('.texteditor-value').val($(this).html());
+			});
+		},
+		clear: function(jq){
+			return jq.each(function(){
+				$(this).texteditor('setValue', null);
+			});
+		},
+		reset: function(jq){
+			return jq.each(function(){
+				var opts = $(this).texteditor('options');
+				$(this).texteditor('setValue', opts.originalValue);
 			});
 		},
 		disable: function(jq){
@@ -313,7 +347,7 @@
 		inline: true,
 		border: 'thin',
 		name: '',
-		toolbar: ['bold','italic','strikethrough','underline','-','justifyleft','justifycenter','justifyright','justifyfull','-','insertorderedlist','insertunorderedlist','outdent','indent','-','insertimage','insertlink','-','forecolor','backcolor','-','formatblock','fontname','fontsize'],
+		toolbar: ['bold','italic','strikethrough','underline','-','justifyleft','justifycenter','justifyright','justifyfull','-','insertorderedlist','insertunorderedlist','outdent','indent','-','insertimage','insertlink','-','forecolor','backcolor','-','formatblock','fontname','fontsize','lineheight'],
 		commands: {
 			'bold': {
 				type: 'linkbutton',
@@ -489,6 +523,33 @@
 					$(this).texteditor('getEditor').texteditor('execCommand','fontsize '+value);
 				}
 			},
+			'lineheight': {
+                type: 'combobox',
+                width: 120,
+                prompt: 'Line Height',
+                editable: false,
+                panelHeight: 'auto',
+                data: [
+                    {value: '1',text:'1'},
+                    {value: '1.1',text:'1.1'},
+                    {value: '1.2',text:'1.2'},
+                    {value: '1.3',text:'1.3'},
+                    {value: '1.4',text:'1.4'},
+                    {value: '1.5',text:'1.5'},
+                    {value: '2',text:'2'}
+                ],
+                onChange: function(value){
+                    var editor = $(this).texteditor('getEditor');
+                    var range = editor.texteditor('options').selectedRange;
+                    if (range){
+                        var p = $(range.startContainer).parent();
+                        if (p[0] != editor[0]){
+                            p.css('lineHeight', value);
+                            editor.texteditor('execCommand','lineheight '+value);
+                        }
+                    }
+                }
+            },
 			'insertimage': {
 				type: 'linkbutton',
 				iconCls: 'icon-image',
@@ -573,4 +634,7 @@
 	});
 
 	$.parser.plugins.push('texteditor');
+	if ($.fn.form){
+		$.fn.form.defaults.fieldTypes.push('texteditor');
+	}
 })(jQuery);

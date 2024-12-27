@@ -1,3 +1,8 @@
+/**
+ * DataGrid Filter for jQuery EasyUI
+ * version: 1.0.7
+ */
+
 (function($){
 	function getPluginName(target){
 		if ($(target).data('treegrid')){
@@ -10,6 +15,7 @@
 	var autoSizeColumn1 = $.fn.datagrid.methods.autoSizeColumn;
 	var loadDataMethod1 = $.fn.datagrid.methods.loadData;
 	var appendMethod1 = $.fn.datagrid.methods.appendRow;
+	var insertMethod1 = $.fn.datagrid.methods.insertRow;
 	var deleteMethod1 = $.fn.datagrid.methods.deleteRow;
 	$.extend($.fn.datagrid.methods, {
 		autoSizeColumn: function(jq, field){
@@ -43,6 +49,23 @@
 					state.filterSource.total++;
 					if (state.filterSource.rows != state.data.rows){
 						state.filterSource.rows.push(row);
+					}
+				}
+			});
+			return result;
+		},
+		insertRow: function(jq, param){
+			var result = insertMethod1.call($.fn.datagrid.methods, jq, param);
+			jq.each(function(){
+				var state = $(this).data('datagrid');
+				if (state.filterSource){
+					state.filterSource.total++;
+					if (state.filterSource.rows != state.data.rows){
+						var index = param.index || 0;
+						if (index > state.filterSource.rows.length){
+							index = state.filterSource.rows.length;
+						}
+						state.filterSource.rows.splice(index, 0, param.row);
 					}
 				}
 			});
@@ -195,10 +218,12 @@
 						}
 					}
 				}
-				data = {
-					total: data.total - (data.rows.length - rows.length),
-					rows: rows
-				};
+				// data = {
+				// 	total: data.total - (data.rows.length - rows.length),
+				// 	rows: rows
+				// };
+				data.total = data.total - (data.rows.length - rows.length);
+				data.rows = rows;
 			}
 			return data;
 			
@@ -267,6 +292,7 @@
 		},
 		defaultFilterType: 'text',
 		defaultFilterOperator: 'contains',
+		defaultFilterTrigger: 'keydown',
 		defaultFilterOptions: {
 			onInit: function(target){
 				var name = getPluginName(target);
@@ -277,7 +303,8 @@
 				if (input.data('textbox')){
 					input = input.textbox('textbox');
 				}
-				input.unbind('.filter').bind('keydown.filter', function(e){
+				var trigger = filterOpts.trigger || opts.defaultFilterTrigger;
+				input.off('.filter').on(trigger+'.filter', function(e){
 					var t = $(this);
 					if (this.timer){
 						clearTimeout(this.timer);
@@ -293,6 +320,9 @@
 				function _doFilter(){
 					var rule = $(target)[name]('getFilterRule', field);
 					var value = input.val();
+					if (filterOpts.options.prompt && filterOpts.options.prompt==value){
+						value = '';
+					}
 					if (value != ''){
 						if ((rule && rule.value!=value) || !rule){
 							var op = rule ? rule.op : (filterOpts ? filterOpts.defaultFilterOperator||opts.defaultFilterOperator : opts.defaultFilterOperator);
@@ -388,25 +418,25 @@
 		less: {
 			text: 'Less',
 			isMatch: function(source, value){
-				return parseFloat(source) < parseFloat(value);
+				return source < value;
 			}
 		},
 		lessorequal: {
 			text: 'Less Or Equal',
 			isMatch: function(source, value){
-				return parseFloat(source) <= parseFloat(value);
+				return source <= value;
 			}
 		},
 		greater: {
 			text: 'Greater',
 			isMatch: function(source, value){
-				return parseFloat(source) > parseFloat(value);
+				return source > value;
 			}
 		},
 		greaterorequal: {
 			text: 'Greater Or Equal',
 			isMatch: function(source, value){
-				return parseFloat(source) >= parseFloat(value);
+				return source >= value;
 			}
 		}
 	};
@@ -572,7 +602,8 @@
 			rows = rows.concat(translateTreeData(target, item.children, item[opts.idField]));
 		});
 		$.map(rows, function(row){
-			row.children = undefined;
+			// row.children = undefined;
+			delete row.children;
 		});
 		return rows;
 	}
@@ -634,11 +665,17 @@
 					return r;
 				});
 			}
-			data = opts.filterMatcher.call(target, {
+			// data = opts.filterMatcher.call(target, {
+			// 	total: state.filterSource.total,
+			// 	rows: state.filterSource.rows,
+			// 	footer: state.filterSource.footer||[]
+			// });
+			data = opts.filterMatcher.call(target, $.extend({},state.filterSource,{
 				total: state.filterSource.total,
 				rows: state.filterSource.rows,
 				footer: state.filterSource.footer||[]
-			});
+			}));
+			data.filterRows = data.rows;
 		}
 		if (opts.pagination && opts.clientPaging){
 			var dg = $(target);
@@ -680,7 +717,8 @@
 			}
 		}
 		$.map(data.rows, function(row){
-			row.children = undefined;
+			// row.children = undefined;
+			delete row.children;
 		});
 		return data;
 
@@ -779,19 +817,54 @@
 			}
 			return result;
 		};
+		if ((opts.view.type == 'detailview' || opts.view.type == 'scrollview') && opts.frozenColumns && opts.frozenColumns.length) {
+			var onBeforeRender = opts.view.onBeforeRender;
+			opts.view.onBeforeRender = function(target){
+				onBeforeRender.call(opts.view, target)
+				if (!opts.detailviewFilterInited){
+					opts.detailviewFilterInited = true;
+					var fields = $(target).datagrid('getColumnFields', true);
+					if (opts.rownumbers){
+						fields.unshift('_');
+					}
+					var tr = $(target).data('datagrid').dc.header1.find('.datagrid-filter-row');
+					if (tr.length < fields.length){
+						var index = $.inArray('_expander', fields);
+						if (index >= 0){
+							var td = tr.children().eq(index);
+							if (td.length){
+								$('<td class="_expander"></td>').insertBefore(td);
+							} else {
+								$('<td class="_expander"></td>').appendTo(tr);
+							}
+						}
+					}
+					
+				}
+			}
+		}
 
 		// opts.loadFilter = myLoadFilter;
 		opts.loadFilter = function(data, parentId){
 			var d = opts.oldLoadFilter.call(this, data, parentId);
 			return myLoadFilter.call(this, d, parentId);
 		};
-		state.dc.view2.children('.datagrid-header').unbind('.filter').bind('focusin.filter', function(e){
+		state.dc.view2.children('.datagrid-header').off('.filter').on('focusin.filter', function(e){
 			var header = $(this);
 			setTimeout(function(){
 				state.dc.body2._scrollLeft(header._scrollLeft());
 			},0);
+		}).on('keydown.filter', function(e){
+			e.stopPropagation();
+		}).on('keypress.filter', function(e){
+			e.stopPropagation();
 		});
-		
+		state.dc.view1.children('.datagrid-header').off('.filter').on('keydown.filter', function(e){
+			e.stopPropagation();
+		}).on('keypress.filter', function(e){
+			e.stopPropagation();
+		});
+
 		initCss();
 		createFilter(true);
 		createFilter();
@@ -952,7 +1025,7 @@
 			});
 
 			btn[0].menu = menu;
-			btn.bind('click', {menu:menu}, function(e){
+			btn.on('click', {menu:menu}, function(e){
 				$(this.menu).menu('show');
 				return false;
 			});
@@ -971,6 +1044,15 @@
 	}
 	
 	$.extend($.fn.datagrid.methods, {
+		isFilterEnabled: function(jq){
+			var name = getPluginName(jq[0]);
+			var opts = $.data(jq[0], name).options;
+			if (opts.oldLoadFilter){
+				return true;
+			} else {
+				return false;
+			}
+		},
 		enableFilter: function(jq, filters){
 			return jq.each(function(){
 				var name = getPluginName(this);
@@ -1014,7 +1096,8 @@
 				if (state.filterSource){
 					data = state.filterSource;
 					$.map(data.rows, function(row){
-						row.children = undefined;
+						// row.children = undefined;
+						delete row.children;
 					});
 				}
 				dc.header1.add(dc.header2).find('tr.datagrid-filter-row').remove();
